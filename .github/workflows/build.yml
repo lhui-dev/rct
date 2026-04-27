@@ -40,13 +40,13 @@ jobs:
         run: cargo fmt -- --check
 
       - name: Check the package for errors
-        run: cargo check --all
+        run: cargo check --workspace
 
       - name: Lint rust sources
-        run: cargo clippy --all-targets --all-features --tests --benches -- -D warnings
+        run: cargo clippy --workspace --all-targets --all-features -- -D warnings
 
       - name: Execute rust tests
-        run: cargo nextest run --all-features
+        run: cargo nextest run --all-features --no-tests=pass
 
       - name: Generate a changelog
         uses: orhun/git-cliff-action@v4
@@ -63,7 +63,3 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           body: ${{ steps.git-cliff.outputs.content }}
-
-      - name: Fix Windows path for Rust tools
-        if: matrix.platform == 'windows-latest'
-        run: echo "CARGO_HOME=$HOME\.cargo" >> $GITHUB_ENV

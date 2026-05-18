@@ -82,7 +82,6 @@ rustup update stable
 
 # 项目生成工具
 cargo install cargo-generate
-pip install pre-commit
 
 # 工程工具链
 cargo install cargo-deny cargo-cliff typos-cli cargo-make cargo-nextest
@@ -102,19 +101,24 @@ cargo generate --git https://github.com/lhui-dev/rct --name my-app
 
 ```bash
 cd my-app
-pre-commit install
 cargo build
 ```
 
 ---
 
-### 4. 执行完整流程
+### 4. 执行检查流程
 
 ```bash
 cargo make do
 ```
 
-一条命令完成：格式化 → 检查 → 测试 → 提交 → 生成 CHANGELOG
+一条命令完成：格式化 → 检查 → 测试
+
+```bash
+cargo make release
+```
+
+单独执行提交和生成 CHANGELOG。
 
 ---
 
@@ -122,7 +126,7 @@ cargo make do
 
 内置基于 `cargo-make` 的自动化任务系统。
 
-### 一键执行
+### 一键检查
 
 ```bash
 cargo make do
@@ -131,8 +135,16 @@ cargo make do
 ### 执行流程
 
 ```
-format → deny → typos → check → clippy → test → commit → cliff
+format → deny → typos → check → clippy → test
 ```
+
+### 发布流程
+
+```bash
+cargo make release
+```
+
+commit → changelog
 
 ### 单独执行任务
 
@@ -183,7 +195,6 @@ cargo deny check
 ├── cliff.toml
 ├── typos.toml
 ├── Makefile.toml
-├── .pre-commit-config.yaml
 ├── README.en.md
 ├── README.md
 └── LICENSE
@@ -193,7 +204,9 @@ cargo deny check
 
 ## ⚙️ 模板自定义
 
-支持通过 `cargo-generate.toml` 定义模板变量，实现初始化时动态替换。
+支持通过 `cargo-generate.toml` 定义模板变量，实现初始化时动态替换，例如 `description`。
+
+生成项目后，记得把 `cliff.toml` 里的仓库地址改成你自己的仓库地址。
 
 ---
 

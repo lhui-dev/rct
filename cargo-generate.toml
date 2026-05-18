@@ -9,3 +9,8 @@ ignore = [".idea", "target", "CHANGELOG.md"]
 type = "string"
 prompt = "What does your project do?"
 default = "A Rust project."
+
+[placeholders.repository]
+type = "string"
+prompt = "What is your repository URL?"
+default = "https://github.com/your-username/your-repo"

@@ -45,6 +45,7 @@
 
 * 集成 `cargo clippy` + `cargo fmt`
 * `typos` 拼写检查
+* 默认包含基础 lint 约束与 Rust 版本声明
 
 ### 🔐 依赖安全
 
@@ -204,9 +205,11 @@ cargo deny check
 
 ## ⚙️ 模板自定义
 
-支持通过 `cargo-generate.toml` 定义模板变量，实现初始化时动态替换，例如 `description`。
+支持通过 `cargo-generate.toml` 定义模板变量，实现初始化时动态替换，例如 `Cargo.toml` 中的 `description`、`authors` 和 `repository`。
 
 生成项目后，记得把 `cliff.toml` 里的仓库地址改成你自己的仓库地址。
+
+当前模板仍保留固定包名 `rct`，这样模板仓库本身还能继续正常执行 `cargo check`；如果你希望生成时连包名也一起改，我可以继续把它改成“纯模板模式”。
 
 ---
 

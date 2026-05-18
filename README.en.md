@@ -46,6 +46,7 @@ No boilerplate setup. No repeated configuration. Just focus on building.
 
 * `cargo clippy` + `cargo fmt`
 * `typos` spell checking
+* Includes baseline lint rules and a declared minimum Rust version
 
 ### 🔐 Dependency Safety
 
@@ -190,9 +191,11 @@ cargo deny check
 
 ## ⚙️ Customization
 
-Supports `cargo-generate.toml` for template variables like `description`.
+Supports `cargo-generate.toml` for template variables such as `description`, `authors`, and `repository` in `Cargo.toml`.
 
 After generating a project, update the repository URL in `cliff.toml` to match your own repository.
+
+The template still keeps a fixed package name `rct` so the template repository itself remains buildable with `cargo check`. If you want the package name to be generated too, I can convert it into a pure template setup next.
 
 ---
 

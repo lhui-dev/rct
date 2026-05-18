@@ -44,7 +44,6 @@ No boilerplate setup. No repeated configuration. Just focus on building.
 
 ### 🔍 Code Quality
 
-* `pre-commit` hooks
 * `cargo clippy` + `cargo fmt`
 * `typos` spell checking
 
@@ -84,7 +83,6 @@ rustup update stable
 
 # for generate
 cargo install cargo-generate
-pip install pre-commit
 
 # install dependencies
 cargo install cargo-deny cargo-cliff typos-cli cargo-make cargo-nextest
@@ -104,15 +102,20 @@ cargo generate --git https://github.com/lhui-dev/rct --name my-app
 
 ```bash
 cd my-app
-pre-commit install
 cargo build
 ```
 
-### 4. Run full pipeline
+### 4. Run validation pipeline
 
 `cargo make do`
 
-Run format → lint → test → commit → changelog in one command
+Run format → lint → test in one command
+
+```bash
+cargo make release
+```
+
+Run commit + changelog separately.
 
 ---
 
@@ -120,14 +123,16 @@ Run format → lint → test → commit → changelog in one command
 
 Built-in automation powered by cargo-make.
 
-**Run everything**
+**Run validation**
 
 ```bash
 cargo make do
 
 ```
 
-**Pipeline:** format → deny → typos → check → clippy → test → commit → cliff
+**Pipeline:** format → deny → typos → check → clippy → test
+
+**Release:** commit → changelog
 
 **Run individually**
 
@@ -176,7 +181,6 @@ cargo deny check
 ├── cliff.toml
 ├── typos.toml
 ├── Makefile.toml
-├── .pre-commit-config.yaml
 ├── README.en.md
 ├── README.md
 └── LICENSE
@@ -186,7 +190,9 @@ cargo deny check
 
 ## ⚙️ Customization
 
-Supports `cargo-generate.toml` for template variables.
+Supports `cargo-generate.toml` for template variables like `description`.
+
+After generating a project, update the repository URL in `cliff.toml` to match your own repository.
 
 ---
 

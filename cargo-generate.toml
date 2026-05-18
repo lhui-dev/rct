@@ -1,2 +1,11 @@
 [template]
+# Copy cliff.toml as-is so git-cliff's own `{{ }}` syntax is not treated as
+# a cargo-generate template expression. Users should update the repository URL
+# in the generated file after project creation.
 exclude = ["cliff.toml"]
+ignore = [".idea", "target", "CHANGELOG.md"]
+
+[placeholders.description]
+type = "string"
+prompt = "What does your project do?"
+default = "A Rust project."

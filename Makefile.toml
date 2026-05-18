@@ -41,18 +41,11 @@ dependencies = ["add"]
 
 [tasks.cliff]
 install_crate = "git-cliff"
-command = "git"
-args = ["cliff", "-o", "CHANGELOG.md"]
-dependencies = ["commit"]
+command = "git-cliff"
+args = ["-o", "CHANGELOG.md"]
+
+[tasks.release]
+dependencies = ["commit", "cliff"]
 
 [tasks.do]
-dependencies = [
-    "format",
-    "deny",
-    "typos",
-    "check",
-    "clippy",
-    "test",
-    "commit",
-    "cliff"
-]
+dependencies = ["format", "deny", "typos", "check", "clippy", "test"]
